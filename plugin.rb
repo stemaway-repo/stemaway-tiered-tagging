@@ -56,7 +56,7 @@ after_initialize do
     end
 
     # Preload the Fields
-    add_preloaded_topic_list_custom_fields(field[:name])
+    add_preloaded_topic_list_custom_field(field[:name])
 
     # Serialize to the topic list
     add_to_serializer(:topic_list_item, field[:name].to_sym) do
