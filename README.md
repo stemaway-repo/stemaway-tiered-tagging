@@ -1,5 +1,3 @@
-# **Plugin Name** Plugin
+# **Plugin Name** STEM-Away® Tiered Tagging
 
-**Plugin Summary**
-
-For more information, please see: **url to meta topic**
+A tiered tagging structure for skills on the STEM-Away platform
