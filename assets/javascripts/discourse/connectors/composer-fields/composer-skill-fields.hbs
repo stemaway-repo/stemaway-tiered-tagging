@@ -1,0 +1,34 @@
+{{multi-select
+  content=pathwayLabels
+  valueProperty=null
+  nameProperty=null
+  closeOnChange=true
+  value=model.product
+  onChange=(action "updatePathwayTags")
+  options=(hash none="stemaway_tiered_tagging.pathways.none" maximum=1)
+}}
+{{!-- {{popup-input-tip validation=pathwayValidation}} --}}
+
+{{#if showSkills}}
+  {{multi-select
+    content=skills
+    valueProperty=null
+    nameProperty=null
+    value=model.versions
+    onChange=(action "updateSkillTags")
+    options=(hash none="stemaway_tiered_tagging.skills.none")
+  }}
+  {{!-- {{popup-input-tip validation=skillValidation}} --}}
+{{/if}}
+
+{{#if showSubSkills}}
+  {{multi-select
+    content=subSkills
+    valueProperty=null
+    nameProperty=null
+    value=model.versions
+    onChange=(action "updateSubSkillTags")
+    options=(hash none="stemaway_tiered_tagging.sub_skills.none")
+  }}
+  {{!-- {{popup-input-tip validation=subSkillValidation}} --}}
+{{/if}}

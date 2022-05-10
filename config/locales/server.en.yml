@@ -1,1 +1,3 @@
 en:
+  site_settings:
+    stemaway_tiered_tagging_enabled: "Check to enable tiered tagging system."

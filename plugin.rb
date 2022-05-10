@@ -13,6 +13,14 @@ enabled_site_setting :stemaway_tiered_tagging_enabled
 register_asset 'stylesheets/common.scss'
 
 after_initialize do
+  %w[
+    ../lib/stemaway-tiered-tagging/engine.rb
+    ../config/routes.rb
+    ../app/controllers/stemaway_tiered_tagging/skills_controller.rb
+  ].each do |key|
+    load File.expand_path(key, __FILE__)
+  end
+
   fields = [
     { name: 'pathway', type: 'json' },
     { name: 'skill', type: 'json' },
@@ -63,5 +71,4 @@ after_initialize do
       object.send(field[:name])
     end
   end
-
 end

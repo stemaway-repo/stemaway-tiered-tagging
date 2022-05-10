@@ -2,3 +2,7 @@ plugins:
   stemaway_tiered_tagging_enabled:
     default: true
     client: true
+  pathway_tag_group:
+    default: "Pathways"
+    type: string
+    client: true

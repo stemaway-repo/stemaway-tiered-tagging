@@ -1,4 +1,9 @@
 en:
   js:
     stemaway_tiered_tagging:
-      placeholder: placeholder
+      pathways:
+        none: "Pathway"
+      skills:
+        none: "Skill"
+      sub_skills:
+        none: "Sub Skill"
