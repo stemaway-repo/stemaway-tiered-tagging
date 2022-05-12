@@ -1,3 +1,18 @@
 .composer-skill-fields {
   margin-bottom: 1rem;
+  display: flex;
+  gap: 0.5rem;
+
+  .select-kit.multi-select {
+    width: 100%;
+
+    .name {
+      background: var(--stemaway-primary-300);
+      color: var(--stemaway-primary-400);
+      font-weight: bold;
+      border-radius: 4px;
+      flex: unset;
+      padding: 0.25em 0.5em;
+    }
+  }
 }

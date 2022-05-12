@@ -1,37 +1,95 @@
-import { dasherize } from "@ember/string";
 import { ajax } from "discourse/lib/ajax";
+import { popupAjaxError } from "discourse/lib/ajax-error";
+
+function buildDropdown(all, selected) {
+  return all
+    .filter((value) => selected.includes(value.name))
+    .map((value) => value.skills)
+    .flat(1);
+}
+
+function resetProperties(model, component) {
+  model.setProperties({
+    pathway: null,
+    skill: null,
+    subSkill: null,
+  });
+
+  return component.setProperties({
+    showSkills: false,
+    showSubSkills: false,
+  });
+}
+
+function setPathwayProps(context, all, selected) {
+  const skills = buildDropdown(all, selected);
+  return context.setProperties({
+    showSkills: true,
+    skills,
+  });
+}
+
+function setSkillProps(context, all, selected) {
+  const subSkills = buildDropdown(all, selected);
+  return context.setProperties({
+    showSubSkills: true,
+    subSkills,
+  });
+}
+
+function handleOpenDraft(allData, context) {
+  // Prefill data when opening a draft
+  const model = context.model;
+
+  if (model.pathway) {
+    context.set("pathway", model.pathway);
+  }
+
+  if (model.skill) {
+    setPathwayProps(context, allData, model.pathway);
+  }
+
+  if (model.subSkill) {
+    const allSkills = buildDropdown(allData, model.pathway);
+    setSkillProps(context, allSkills, model.skill);
+  }
+}
 
 export default {
+  shouldRender(args, component) {
+    return component.siteSettings.stemaway_tiered_tagging_enabled;
+  },
+
   setupComponent(attrs, component) {
     const model = attrs.model;
-    console.log(model);
-    ajax(`/tags.json`).then(({ extras }) => {
-      const tagGroups = extras.tag_groups;
-      const pathwayTagGroup = this.siteSettings.pathway_tag_group;
 
-      const pathways = tagGroups.find((tg) => tg.name === pathwayTagGroup).tags;
-      const pathwayLabels = pathways.map((tag) => tag.id);
-      const skills = tagGroups
-        .filter((tg) => pathwayLabels.includes(dasherize(tg.name)))
-        .map((tg) => dasherize(tg.name));
-
-      console.log("skills", skills);
-
-      this.set("pathwayLabels", pathwayLabels);
-    });
+    ajax(`/skills.json`)
+      .then((result) => {
+        const allData = result.skills;
+        this.set("pathways", allData);
+        handleOpenDraft(allData, this);
+      })
+      .catch(popupAjaxError);
   },
 
   actions: {
-    updatePathwayTags() {
-      console.log("Pathway Tags Updated");
+    updatePathwayTags(selected) {
+      // If selected pathway is removed:
+      if (selected.length < 1) {
+        resetProperties(this.model, this);
+      }
+
+      this.model.set("pathway", selected);
+      setPathwayProps(this, this.pathways, selected);
     },
 
-    updateSkillTags() {
-      console.log("Skill Tags Updated");
+    updateSkillTags(selected) {
+      this.model.set("skill", selected);
+      setSkillProps(this, this.skills, selected);
     },
 
-    updateSubSkillTags() {
-      console.log("Skill Tags Updated");
+    updateSubSkillTags(selected) {
+      this.model.set("subSkill", selected);
     },
   },
 };

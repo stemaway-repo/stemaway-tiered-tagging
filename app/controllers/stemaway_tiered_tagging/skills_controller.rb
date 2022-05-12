@@ -11,17 +11,29 @@ module StemawayTieredTagging
       pathways.each do |pathway|
         skills = Tag.joins(:tag_group_memberships).where('tag_group_memberships.tag_group_id IN (?)', TagGroup.where(name: pathway[:name].titleize).first).select(:id, :name, :description)
 
-        all_skills = []
-        skills.each do |skill|
-          sub_skills = []
-          sub_skills.push(Tag.joins(:tag_group_memberships).where('tag_group_memberships.tag_group_id IN (?)', TagGroup.where(name: skill[:name].titleize).first).select(:id, :name, :description))
+        if skills.present?
+          all_skills = []
+          skills.each do |skill|
+            sub_skills = Tag.joins(:tag_group_memberships).where('tag_group_memberships.tag_group_id IN (?)', TagGroup.where(name: skill[:name].titleize).first).select(:id, :name, :description)
 
-          all_skills.push({
-            id: skill[:id],
-            name: skill[:name],
-            description: skill[:description],
-            skills: sub_skills
-          })
+            if (sub_skills.present?)
+              all_skills.push({
+                id: skill[:id],
+                name: skill[:name],
+                description: skill[:description],
+                skills: sub_skills
+              })
+            else
+              all_skills.push({
+                id: skill[:id],
+                name: skill[:name],
+                description: skill[:description],
+                skills: []
+              })
+            end
+          end
+        else
+          all_skills = []
         end
 
         data << {
@@ -30,7 +42,6 @@ module StemawayTieredTagging
           description: pathway[:description],
           skills: all_skills
         }
-
       end
 
       render json: data

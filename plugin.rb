@@ -24,8 +24,8 @@ after_initialize do
   fields = [
     { name: 'pathway', type: 'json' },
     { name: 'skill', type: 'json' },
-    { name: 'sub_skill', type: 'json' },
-    { name: 'other_tags', type: 'json' }
+    { name: 'subSkill', type: 'json' },
+    { name: 'otherTags', type: 'json' }
   ]
 
   fields.each do |field|
