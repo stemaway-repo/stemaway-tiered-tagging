@@ -7,7 +7,7 @@
   onChange=(action "updatePathwayTags")
   options=(hash none="stemaway_tiered_tagging.pathways.none")
 }}
-{{!-- {{popup-input-tip validation=pathwayValidation}} --}}
+{{popup-input-tip validation=pathwayValidation}}
 
 {{#if showSkills}}
   {{multi-select
@@ -19,7 +19,7 @@
     onChange=(action "updateSkillTags")
     options=(hash none="stemaway_tiered_tagging.skills.none")
   }}
-  {{!-- {{popup-input-tip validation=skillValidation}} --}}
+  {{popup-input-tip validation=skillValidation}}
 {{/if}}
 
 {{#if showSubSkills}}
@@ -32,5 +32,5 @@
     onChange=(action "updateSubSkillTags")
     options=(hash none="stemaway_tiered_tagging.sub_skills.none")
   }}
-  {{!-- {{popup-input-tip validation=subSkillValidation}} --}}
+  {{popup-input-tip validation=subSkillValidation}}
 {{/if}}

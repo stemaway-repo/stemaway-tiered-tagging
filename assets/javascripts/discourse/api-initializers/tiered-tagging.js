@@ -1,8 +1,9 @@
+import discourseComputed from "discourse-common/utils/decorators";
 import { apiInitializer } from "discourse/lib/api";
 
 export default apiInitializer("1.2.0", (api) => {
   const PLUGIN_ID = "stemaway-tiered-tagging";
-  const siteSettings = api.container.lookup("site-settings:main");
+
   const FIELDS = [
     { name: "pathway", type: "json" },
     { name: "skill", type: "json" },
@@ -12,19 +13,17 @@ export default apiInitializer("1.2.0", (api) => {
 
   api.modifyClass("controller:composer", {
     pluginId: PLUGIN_ID,
+
+    @discourseComputed("model")
+    pathwayValidation() {
+      // TODO ?
+    },
   });
 
   api.modifyClass("model:composer", {
     pluginId: PLUGIN_ID,
-
+    // eslint-disable-next-line no-unused-vars
     save(opts) {
-      console.group("model:composer");
-      console.log("this", this);
-      console.log("pathway", this.pathway);
-      console.log("skill", this.skill);
-      console.log("subSkill", this.subSkill);
-      console.groupEnd();
-
       const pathway = this.pathway;
       const skill = this.skill;
       const subSkill = this.subSkill;
@@ -38,7 +37,6 @@ export default apiInitializer("1.2.0", (api) => {
       }
 
       if (pathway) {
-        console.log("called");
         addToTags.push(...pathway);
       }
 

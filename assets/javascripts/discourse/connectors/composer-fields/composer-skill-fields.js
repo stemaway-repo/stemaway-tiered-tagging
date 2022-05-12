@@ -60,9 +60,8 @@ export default {
     return component.siteSettings.stemaway_tiered_tagging_enabled;
   },
 
-  setupComponent(attrs, component) {
-    const model = attrs.model;
-
+  // eslint-disable-next-line no-unused-vars
+  setupComponent(args, component) {
     ajax(`/skills.json`)
       .then((result) => {
         const allData = result.skills;
