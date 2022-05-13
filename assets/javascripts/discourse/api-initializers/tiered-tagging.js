@@ -54,6 +54,29 @@ export default apiInitializer("1.2.0", (api) => {
     },
   });
 
+  api.modifyClass("controller:topic", {
+    pluginId: PLUGIN_ID,
+
+    actions: {
+      finishedEditingTopic() {
+        const pathwayTags = this.buffered.get("pathway") || [];
+        const skillTags = this.buffered.get("skill") || [];
+        const subSkillTags = this.buffered.get("subSkill") || [];
+        const otherTags = this.buffered.get("otherTags") || [];
+
+        const allTags = [
+          ...pathwayTags,
+          ...skillTags,
+          ...subSkillTags,
+          ...otherTags,
+        ];
+
+        this.buffered.set("tags", allTags);
+        return this._super(...arguments);
+      },
+    },
+  });
+
   FIELDS.forEach((field) => {
     api.serializeOnCreate(field.name);
     api.serializeToDraft(field.name);

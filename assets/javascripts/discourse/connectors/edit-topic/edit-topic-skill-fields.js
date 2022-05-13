@@ -1,4 +1,10 @@
-import { prepareData } from "../../lib/skill-property-helpers";
+import {
+  prepareData,
+  resetProperties,
+  setPathwayProps,
+  setSkillProps,
+  updateDependantDropdowns,
+} from "../../lib/skill-property-helpers";
 
 export default {
   shouldRender(args, component) {
@@ -10,24 +16,45 @@ export default {
   },
 
   actions: {
-    // eslint-disable-next-line no-unused-vars
-    updatePathwayTags(pathway) {
-      // TODO
+    updatePathwayTags(selected) {
+      this.set("buffered.pathway", selected);
+
+      if (selected.length < 1) {
+        resetProperties(this.buffered, this);
+      } else {
+        setPathwayProps(this, this.pathways, selected);
+        updateDependantDropdowns(
+          this,
+          this.get("buffered.skill"),
+          this.get("skills"),
+          "updateSkillTags"
+        );
+      }
     },
 
-    // eslint-disable-next-line no-unused-vars
-    updateSkillTags(skill) {
-      // TODO
+    updateSkillTags(selected) {
+      this.set("buffered.skill", selected);
+
+      if (selected.length < 1) {
+        this.buffered.set("subSkill", null);
+        return this.set("showSubSkills", false);
+      } else {
+        setSkillProps(this, this.skills, selected);
+        updateDependantDropdowns(
+          this,
+          this.get("buffered.subSkill"),
+          this.get("subSkills"),
+          "updateSubSkillTags"
+        );
+      }
     },
 
-    // eslint-disable-next-line no-unused-vars
-    updateSubSkillTags(subSkill) {
-      // TODO
+    updateSubSkillTags(selected) {
+      this.set("buffered.subSkill", selected);
     },
 
-    // eslint-disable-next-line no-unused-vars
-    updateOtherTags(otherTags) {
-      // TODO
+    updateOtherTags(selected) {
+      this.set("buffered.otherTags", selected);
     },
   },
 };

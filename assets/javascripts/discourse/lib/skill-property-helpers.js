@@ -8,6 +8,18 @@ export function buildDropdown(all, selected) {
     .flat(1);
 }
 
+export function updateDependantDropdowns(context, buffered, all, action) {
+  if (!buffered) {
+    return;
+  }
+
+  const updated = all
+    .filter((v) => buffered.includes(v.name))
+    .map((v) => v.name);
+
+  return context.send(action, updated);
+}
+
 export function resetProperties(model, component) {
   model.setProperties({
     pathway: null,
