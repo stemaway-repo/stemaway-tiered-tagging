@@ -3,7 +3,13 @@ en:
     stemaway_tiered_tagging:
       pathways:
         none: "Pathway"
+        label: "Pathway Tags"
       skills:
         none: "Skill"
+        label: "Skill Tags"
       sub_skills:
         none: "Sub Skill"
+        label: "Sub Skill Tags"
+      other_tags:
+        none: "Other"
+        label: "Other Tags"

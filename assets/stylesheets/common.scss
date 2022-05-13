@@ -16,3 +16,40 @@
     }
   }
 }
+
+#topic-title .edit-topic-title > .mini-tag-chooser {
+  display: none;
+}
+
+#topic-title #edit-title,
+#topic-title .category-chooser,
+#topic-title .edit-controls {
+  width: 300px;
+}
+
+#topic-title .edit-topic-title .category-chooser,
+#topic-title .edit-topic-title .mini-tag-chooser {
+  flex: unset;
+  margin: 0 0 9px 9px;
+}
+
+.edit-topic-skill-fields {
+  display: flex;
+  gap: 2%;
+
+  .skill-field-container {
+    flex: 1;
+    width: 190px;
+
+    .select-kit.multi-select {
+      width: 100%;
+    }
+
+    .desc {
+      color: var(--primary-medium);
+      padding-top: 3px;
+      font-size: var(--font-down-1);
+      line-height: var(--line-height-large);
+    }
+  }
+}
