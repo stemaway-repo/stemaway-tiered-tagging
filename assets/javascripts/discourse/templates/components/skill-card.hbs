@@ -1,0 +1,9 @@
+{{skill-card-header item=item showChildSkills=(action "showSkills")}}
+
+{{#if childSkills}}
+  <div class="skills-card-skills-container child-skills">
+    {{#each item.skills as |skill|}}
+      {{skill-card item=skill class="skills-card-sub-skills"}}
+    {{/each}}
+  </div>
+{{/if}}

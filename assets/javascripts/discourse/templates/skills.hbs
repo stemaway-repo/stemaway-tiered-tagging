@@ -1,0 +1,9 @@
+<header class="skills-page-header">
+  <h1>{{i18n "stemaway_tiered_tagging.skills_page.title"}}</h1>
+  <p>{{i18n "stemaway_tiered_tagging.skills_page.description"}}</p>
+</header>
+<div class="skills-page-list">
+  {{#each skills as |pathway|}}
+    {{skill-card item=pathway}}
+  {{/each}}
+</div>

@@ -21,6 +21,10 @@ after_initialize do
     load File.expand_path(key, __FILE__)
   end
 
+  if respond_to?(:register_svg_icon)
+    register_svg_icon "angle-down"
+  end
+
   fields = [
     { name: 'pathway', type: 'json' },
     { name: 'skill', type: 'json' },

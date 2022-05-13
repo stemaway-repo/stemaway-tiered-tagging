@@ -1,6 +1,9 @@
 en:
   js:
     stemaway_tiered_tagging:
+      skills_page:
+        title: "STEM-Away Skills"
+        description: "Categorized sets of skills acquired by participating throughout the STEM-Away platform."
       pathways:
         none: "Pathway"
         label: "Pathway Tags"
