@@ -10,9 +10,8 @@ export default {
     return component.siteSettings.stemaway_tiered_tagging_enabled;
   },
 
-  // eslint-disable-next-line no-unused-vars
   setupComponent(args, component) {
-    prepareData(this);
+    prepareData(component);
   },
 
   actions: {

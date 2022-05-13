@@ -6,7 +6,7 @@ export default {
   },
 
   setupComponent(args, component) {
-    prepareData(this);
+    prepareData(component);
   },
 
   actions: {
