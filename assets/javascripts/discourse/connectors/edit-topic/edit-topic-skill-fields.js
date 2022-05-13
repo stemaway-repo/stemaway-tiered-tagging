@@ -10,12 +10,24 @@ export default {
   },
 
   actions: {
-    updatePathwayTags(pathway) {},
+    // eslint-disable-next-line no-unused-vars
+    updatePathwayTags(pathway) {
+      // TODO
+    },
 
-    updateSkillTags(skill) {},
+    // eslint-disable-next-line no-unused-vars
+    updateSkillTags(skill) {
+      // TODO
+    },
 
-    updateSubSkillTags(subSkill) {},
+    // eslint-disable-next-line no-unused-vars
+    updateSubSkillTags(subSkill) {
+      // TODO
+    },
 
-    updateOtherTags(otherTags) {},
+    // eslint-disable-next-line no-unused-vars
+    updateOtherTags(otherTags) {
+      // TODO
+    },
   },
 };
