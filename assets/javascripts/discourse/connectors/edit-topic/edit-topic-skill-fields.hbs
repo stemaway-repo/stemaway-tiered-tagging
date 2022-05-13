@@ -1,6 +1,5 @@
 <div class="skill-field-container">
   {{multi-select
-    class="composer-pathway-field"
     content=pathways
     nameProperty="name"
     valueProperty="name"
@@ -15,7 +14,6 @@
 
 <div class="skill-field-container">
   {{multi-select
-    class="composer-skill-field"
     content=skills
     valueProperty="name"
     nameProperty="name"
@@ -30,7 +28,6 @@
 
 <div class="skill-field-container">
   {{multi-select
-    class="composer-sub-skill-field"
     content=subSkills
     valueProperty="name"
     nameProperty="name"
@@ -42,14 +39,14 @@
 </div>
 
 <div class="skill-field-container">
-  {{multi-select
-    class="composer-sub-skill-field"
-    content=otherTags
-    valueProperty="name"
-    nameProperty="name"
-    value=model.otherTags
+  {{mini-tag-chooser
+    value=buffered.otherTags
     onChange=(action "updateOtherTags")
-    options=(hash none="stemaway_tiered_tagging.other_tags.none")
+    options=(hash
+      filterable=true
+      categoryId=buffered.category_id
+      minimum=minimumRequiredTags
+    )
   }}
   <div class="desc">{{i18n "stemaway_tiered_tagging.other_tags.label"}}</div>
 </div>

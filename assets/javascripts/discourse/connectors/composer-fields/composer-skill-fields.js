@@ -1,59 +1,9 @@
-import { ajax } from "discourse/lib/ajax";
-import { popupAjaxError } from "discourse/lib/ajax-error";
-
-function buildDropdown(all, selected) {
-  return all
-    .filter((value) => selected.includes(value.name))
-    .map((value) => value.skills)
-    .flat(1);
-}
-
-function resetProperties(model, component) {
-  model.setProperties({
-    pathway: null,
-    skill: null,
-    subSkill: null,
-  });
-
-  return component.setProperties({
-    showSkills: false,
-    showSubSkills: false,
-  });
-}
-
-function setPathwayProps(context, all, selected) {
-  const skills = buildDropdown(all, selected);
-  return context.setProperties({
-    showSkills: true,
-    skills,
-  });
-}
-
-function setSkillProps(context, all, selected) {
-  const subSkills = buildDropdown(all, selected);
-  return context.setProperties({
-    showSubSkills: true,
-    subSkills,
-  });
-}
-
-function handleOpenDraft(allData, context) {
-  // Prefill data when opening a draft
-  const model = context.model;
-
-  if (model.pathway) {
-    context.set("pathway", model.pathway);
-  }
-
-  if (model.skill) {
-    setPathwayProps(context, allData, model.pathway);
-  }
-
-  if (model.subSkill) {
-    const allSkills = buildDropdown(allData, model.pathway);
-    setSkillProps(context, allSkills, model.skill);
-  }
-}
+import {
+  prepareData,
+  resetProperties,
+  setPathwayProps,
+  setSkillProps,
+} from "../../lib/skill-property-helpers";
 
 export default {
   shouldRender(args, component) {
@@ -62,13 +12,7 @@ export default {
 
   // eslint-disable-next-line no-unused-vars
   setupComponent(args, component) {
-    ajax(`/skills.json`)
-      .then((result) => {
-        const allData = result.skills;
-        this.set("pathways", allData);
-        handleOpenDraft(allData, this);
-      })
-      .catch(popupAjaxError);
+    prepareData(this);
   },
 
   actions: {
