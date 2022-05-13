@@ -65,6 +65,16 @@ export function handlePrefillData(allData, context) {
     const allSkills = buildDropdown(allData, model.pathway);
     setSkillProps(context, allSkills, model.skill);
   }
+
+  // Prefill otherTags input when editing old topics that don't only have regular tags
+  if (
+    model.pathway === null &&
+    model.skill === null &&
+    model.subSkill === null &&
+    model.tags
+  ) {
+    model.set("otherTags", model.tags);
+  }
 }
 
 export function prepareData(context) {
