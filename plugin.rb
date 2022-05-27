@@ -2,7 +2,7 @@
 
 # name: stemaway-tiered-tagging
 # about: A tiered tagging structure for skills on the STEM-Away platform
-# version: 0.0.1
+# version: 1.0.0
 # authors: Keegan George (keegangeorge)
 # contact email: keegan@pavilion.tech
 # url: https://github.com/stemaway-repo/stemaway-tiered-tagging
